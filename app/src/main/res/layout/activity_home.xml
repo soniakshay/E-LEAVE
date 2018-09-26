@@ -1,0 +1,66 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E0E0E0"
+    tools:context="com.example.user.e_leave.Home">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100pt"
+        android:background="#ffa500">
+
+    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/temp"/>
+   <LinearLayout
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:gravity="center_horizontal"
+       android:layout_centerHorizontal="true"
+       android:orientation="horizontal">
+       <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+           xmlns:tools="http://schemas.android.com/tools"
+           android:id="@+id/GridLayout1"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="115dp"
+           android:columnCount="2"
+           android:rowCount="2"
+           android:orientation="horizontal"
+           tools:context=".GridXMLActivity" >
+           <Button
+                android:layout_height="150dp"
+                android:layout_width="150dp"
+                android:text="Leave"
+               android:textColor="#ffa500"
+               android:textSize="15dp"
+               android:background="@drawable/my_button_bg"
+               android:onClick="leaveform"
+               />
+
+           <Button
+               android:layout_height="150dp"
+               android:layout_width="150dp"
+               android:text="Status"
+               android:textColor="#ffa500"
+               android:textSize="15dp"
+               android:background="@drawable/my_button_bg"
+               />
+           <Button
+               android:layout_height="150dp"
+               android:layout_width="150dp"
+               android:text="Leave Request"
+               android:textColor="#ffa500"
+               android:textSize="15dp"
+               android:background="@drawable/my_button_bg"
+               />
+           <Button
+               android:layout_height="150dp"
+               android:layout_width="150dp"
+               android:text="All Leave"  android:textColor="#ffa500"
+               android:textSize="15dp"
+               android:background="@drawable/my_button_bg"></Button>
+       </GridLayout>
+      </LinearLayout>
+</RelativeLayout>

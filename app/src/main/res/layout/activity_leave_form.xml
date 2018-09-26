@@ -1,0 +1,78 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.user.e_leave.LeaveForm">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100pt"
+        android:background="#ffa500">
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_marginTop="150dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:orientation="vertical"
+            android:background="@drawable/my_button_bg">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Leave"
+                android:textColor="#ffa500"
+                android:fontFamily="Arial"
+                android:id="@+id/title"
+                android:textSize="30dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Description"
+                android:textSize="20dp"
+                android:id="@+id/etdesc"
+                />
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/leavetype">
+
+            </Spinner>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="To Date"
+                android:textSize="20dp"
+                android:id="@+id/ettodate"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="From Date"
+                android:textSize="20dp"
+                android:id="@+id/etfromdate"
+                />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:id="@+id/btnsubmit"
+                android:background="#ffa500"
+                android:textColor="#ffffff"
+                android:textSize="30px"
+                android:layout_marginTop="10dp"
+                android:onClick="insertLeave"/>
+
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
