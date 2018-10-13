@@ -11,12 +11,13 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
 public class Home extends Activity {
 
-TextView temp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,11 +27,44 @@ TextView temp;
         setContentView(R.layout.activity_home);
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
         String status = pref.getString("empid", null);
-        temp=(TextView) findViewById(R.id.temp);
-        temp.setText(status);
+
+
+
+
+    }
+    public void logout(View v)
+    {
+        SharedPreferences pref =getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("status",null); // Storing string
+        editor.putString("empid", null); // Storing string
+        editor.commit();
+
+        Intent i=new Intent(Home.this,MainActivity.class);
+        startActivity(i);
+
 
     }
 
+    public void  redirecrLeaveReq(View v)
+    {
+        Intent i=new Intent(Home.this,leave_request.class);
+        startActivity(i);
+
+    }
+
+    public void onBackPressed() {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+        String status = pref.getString("empid", null);
+        if(status!=null)
+        {
+            Toast.makeText(getApplicationContext(),"You Are Already Login!",Toast.LENGTH_LONG).show();
+            Intent i=new Intent(Home.this,Home.class);
+            startActivity(i);
+
+        }
+
+    }
 
     public void leaveform(View view)
     {

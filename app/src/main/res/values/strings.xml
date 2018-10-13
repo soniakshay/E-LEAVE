@@ -6,4 +6,7 @@
     <string name="title_activity_home">Home</string>
     <string name="title_activity_signup">signup</string>
     <string name="title_activity_leave_form">LeaveForm</string>
+    <string name="title_activity_splashscreen">splashscreen</string>
+    <string name="title_activity_leave_status">leave_status</string>
+    <string name="title_activity_leave_request">leave_request</string>
 </resources>

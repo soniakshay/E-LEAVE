@@ -21,6 +21,7 @@
             android:padding="15dp"
             android:orientation="vertical"
             android:background="@drawable/my_button_bg">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -48,11 +49,13 @@
                 android:hint="To Date"
                 android:textSize="20dp"
                 android:id="@+id/ettodate"
+                android:editable="false"
                 />
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="From Date"
+                android:editable="false"
                 android:textSize="20dp"
                 android:id="@+id/etfromdate"
                 />

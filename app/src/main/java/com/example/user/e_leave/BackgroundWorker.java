@@ -268,8 +268,11 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
 
         if(type.equals("insertleave"))
         {
-            alertDialog.setMessage(s);
-            alertDialog.show();
+
+            Toast.makeText(context,"Leave Insert SuccessFully!",Toast.LENGTH_LONG).show();
+            Intent i =new Intent(context,Home.class);
+            context.startActivity(i);
+
 
         }
 

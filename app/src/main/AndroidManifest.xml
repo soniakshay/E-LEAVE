@@ -3,6 +3,7 @@
     package="com.example.user.e_leave" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 "
     <application
         android:allowBackup="true"
@@ -12,11 +13,6 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Home"
@@ -30,9 +26,24 @@
             android:name=".LeaveForm"
             android:label="@string/title_activity_leave_form" >
         </activity>
-    <service android:name=".leavenotification"
-            android:exported="false"
-        ></service>
+
+        <service
+            android:name=".leavenotification"
+            android:exported="false" />
+
+        <activity
+            android:name=".splashscreen"
+            android:label="@string/title_activity_splashscreen" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".leave_request"
+            android:label="@string/title_activity_leave_request" >
+        </activity>
     </application>
 
 </manifest>
