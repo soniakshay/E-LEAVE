@@ -6,18 +6,14 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.renderscript.ScriptIntrinsicYuvToRGB;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,15 +35,10 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class leave_request extends Activity {
-     ListView llistview;
-     customleaveadeptor ladeptor;
-     List<Leave> llleave;
-    public static TextView f;
-     public void  popid(String s)
-    {
-
-    }
+public class Status_Activity extends Activity {
+    ListView llistview;
+    customleaveadeptor ladeptor;
+    List<statuspozo> llleave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,20 +47,18 @@ public class leave_request extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_leave_request);
+        setContentView(R.layout.activity_status_);
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
         String status = pref.getString("empid", null);
         MyTask backgroundWorker = new MyTask(this);
         backgroundWorker.execute("list", status);
 
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_leave_request, menu);
+        getMenuInflater().inflate(R.menu.menu_status_, menu);
         return true;
     }
 
@@ -89,6 +78,9 @@ public class leave_request extends Activity {
     }
 
 
+
+
+
     public class MyTask extends AsyncTask<String, Void, String> {
         Context context;
         AlertDialog alertDialog;
@@ -99,9 +91,9 @@ public class leave_request extends Activity {
         String type;
         @Override
         protected String doInBackground(String... params) {
-             type = params[0];
+            type = params[0];
             if (type.equals("list")) {
-                String login_url = "http://16mca004.000webhostapp.com/eleave/eleave/notification.php";
+                String login_url = "http://16mca004.000webhostapp.com/eleave/eleave/status.php";
 
                 try {
                     String user_name = params[1];
@@ -114,7 +106,7 @@ public class leave_request extends Activity {
                     httpURLConnection.setDoInput(true);
                     OutputStream outputStream = httpURLConnection.getOutputStream();
                     BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                    String post_data = URLEncoder.encode("emp_id","UTF-8")+"="+URLEncoder.encode(user_name,"UTF-8");
+                    String post_data = URLEncoder.encode("login_id", "UTF-8")+"="+URLEncoder.encode(user_name,"UTF-8");
                     bufferedWriter.write(post_data);
                     bufferedWriter.flush();
                     bufferedWriter.close();
@@ -140,48 +132,6 @@ public class leave_request extends Activity {
                 }
             }
 
-
-
-            if(type.equals("leaveupdate")) {
-                String url1 = "http://16mca004.000webhostapp.com/eleave/eleave/updatestatus.php";
-                try {
-                    String user_name = params[1];
-                    // String user_name = "admin";
-                    //String password = "admin";
-                    URL url = new URL(url1);
-                    HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
-                    httpURLConnection.setRequestMethod("POST");
-                    httpURLConnection.setDoOutput(true);
-                    httpURLConnection.setDoInput(true);
-                    OutputStream outputStream = httpURLConnection.getOutputStream();
-                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                    String post_data = URLEncoder.encode("leave_id","UTF-8")+"="+URLEncoder.encode(user_name,"UTF-8");
-                    bufferedWriter.write(post_data);
-                    bufferedWriter.flush();
-                    bufferedWriter.close();
-                    outputStream.close();
-                    InputStream inputStream = httpURLConnection.getInputStream();
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
-                    String result="";
-                    String line="";
-                    while((line = bufferedReader.readLine())!= null) {
-                        result += line;
-                    }
-
-                    bufferedReader.close();
-                    inputStream.close();
-                    httpURLConnection.disconnect();
-                    JSONArray jarr;
-                    String s=null;
-
-
-                    return s;
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
 
 
 
@@ -221,44 +171,52 @@ public class leave_request extends Activity {
 
         @Override
         protected void onPostExecute(String result) {
-            if (type.equals("list")) {
-                 String s = "";
-                llistview = (ListView) findViewById(R.id.tvlist);
-                llleave = new ArrayList<>();
-                String leaveid, name, desc;
-                try {
 
-                    JSONArray jobj = new JSONArray(result);
-                    for (int i = 0; i < jobj.length(); i++) {
-                        JSONArray jsonArray1 = new JSONArray(jobj.getString(i));
-                        leaveid = jsonArray1.getString(0);
-                        name = jsonArray1.getString(1);
-                        desc = jsonArray1.getString(2);
-                        llleave.add(new Leave(i, name, desc, leaveid));
+
+            String name1 ,todate1 ,fromdate1 ,description,designation1,status1 = null;
+            llistview = (ListView) findViewById(R.id.tvlist);
+            llleave = new ArrayList<>();
+
+
+
+            try {
+
+                JSONArray jobj = new JSONArray(result);
+
+                for (int i = 0; i <=jobj.length(); i++) {
+                    JSONObject j=new JSONObject(jobj.getString(i));
+
+
+                    name1 = j.getString("first_name")+" " + j.getString("last_name");
+                    todate1 = j.getString("TO");
+                    fromdate1 = j.getString("FROM");
+                    description = j.getString("Desc");
+                    designation1= j.getString("Name");
+                    if(j.getString("status").equals("5"))
+                    {
+                        status1="Pending from Manager And HR";
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                    if(j.getString("status").equals("2"))
+                    {
+                        status1="Accept from Manager,Pending from HR";
+                    }
 
-                ladeptor = new customleaveadeptor(getApplicationContext(), llleave);
-                llistview.setAdapter(ladeptor);
-            }
 
-                if (type.equals("leaveupdate")) {
-                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
-                    String status = pref.getString("empid", null);
-                    MyTask backgroundWorker = new MyTask(leave_request.this);
-                    backgroundWorker.execute("list", status);
-                    ladeptor.notifyDataSetChanged();
-                    Toast.makeText(context,"Leave Accept Sucessfully!",Toast.LENGTH_LONG).show();
 
+                    llleave.add(new statuspozo(name1 ,fromdate1 ,todate1,description,designation1,status1));
+                    ladeptor = new customleaveadeptor(getApplicationContext(), llleave);
+                    llistview.setAdapter(ladeptor);
 
                 }
-
-
-
-
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
+
+
+
+
+
+        }
 
         @Override
         protected void onProgressUpdate(Void... values) {
@@ -272,10 +230,12 @@ public class leave_request extends Activity {
 
 
 
+
+
     public class customleaveadeptor extends BaseAdapter {
         private Context lcontext;
-        private List<Leave> llist;
-        public customleaveadeptor(Context lcontext, List<Leave> llist) {
+        private List<statuspozo> llist;
+        public customleaveadeptor(Context lcontext, List<statuspozo> llist) {
             this.lcontext = lcontext;
             this.llist = llist;
         }
@@ -301,27 +261,20 @@ public class leave_request extends Activity {
 
         @Override
         public View getView(final int position, final View convertView, ViewGroup parent) {
-            View v=View.inflate(lcontext,R.layout.cutomleavelayout,null);
-            TextView tname=(TextView)v.findViewById(R.id.tvname);
-            TextView tprice=(TextView)v.findViewById(R.id.tvprice);
-            TextView tdec=(TextView)v.findViewById((R.id.tvdec));
-            final Button tbtn=(Button)v.findViewById(R.id.tvbtn);
+            View v=View.inflate(lcontext,R.layout.customstatus,null);
+            TextView name=(TextView)v.findViewById(R.id.tvname);
+            TextView todate=(TextView)v.findViewById(R.id.todate);
+            TextView fromdate=(TextView)v.findViewById((R.id.fromdate));
+            TextView desc=(TextView)v.findViewById((R.id.desc));
+            TextView designation=(TextView)v.findViewById((R.id.dept));
+            TextView status=(TextView)v.findViewById(R.id.status);
 
-            tbtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    MyTask backgroundWorker = new MyTask(leave_request.this);
-                    backgroundWorker.execute("leaveupdate",llist.get(position).getDesc());
-
-
-
-                }
-            });
-            tname.setText(llist.get(position).getName());
-            tprice.setText(llist.get(position).getLeaveid());
-            tdec.setText(llist.get(position).getDesc());
-
-            v.setTag(llist.get(position).getId());
+            status.setText(llist.get(position).getStatus());
+            name.setText(llist.get(position).getName());
+            todate.setText(llist.get(position).getTodate());
+            fromdate.setText(llist.get(position).getFromdate());
+            desc.setText(llist.get(position).getDesc());
+            designation.setText(llist.get(position).getDesignation());
             return v;
 
 
@@ -335,38 +288,4 @@ public class leave_request extends Activity {
 
 
 
-
-
-
-
-
-
-
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

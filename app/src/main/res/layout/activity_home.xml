@@ -42,6 +42,7 @@
                android:textColor="#ffa500"
                android:textSize="15dp"
                android:background="@drawable/my_button_bg"
+               android:onClick="status_activity"
                />
            <Button
                android:layout_height="150dp"
@@ -57,13 +58,17 @@
                android:layout_width="150dp"
                android:text="All Leave"  android:textColor="#ffa500"
                android:textSize="15dp"
-               android:background="@drawable/my_button_bg"></Button>
+               android:background="@drawable/my_button_bg"
+               android:onClick="Allleave_activity"
+               ></Button>
            <Button
                android:layout_height="150dp"
                android:layout_width="150dp"
                android:text="Today Leave Employee"
                android:textColor="#ffa500"
                android:textSize="15dp"
+               android:onClick="todayleave"
+               android:layout_marginTop="-10dp"
                android:background="@drawable/my_button_bg"></Button>
 
 

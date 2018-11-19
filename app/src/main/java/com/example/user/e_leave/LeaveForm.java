@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,6 +51,10 @@ public class LeaveForm extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -73,7 +78,7 @@ public class LeaveForm extends Activity {
         todate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               datePicker1();
+                datePicker1();
 
             }
         });
@@ -130,8 +135,7 @@ public class LeaveForm extends Activity {
          String todate1 = todate.getText().toString();
          String fromdate1 = fromdate.getText().toString();
          String leavetype1=leavetype.getSelectedItem().toString();
-
-        BackgroundWorker backgroundWorker = new BackgroundWorker(this);
+            BackgroundWorker backgroundWorker = new BackgroundWorker(this);
         backgroundWorker.execute(type,desc1,todate1,fromdate1,leavetype1,empid);
 
 

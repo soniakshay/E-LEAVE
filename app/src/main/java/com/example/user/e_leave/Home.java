@@ -32,6 +32,26 @@ public class Home extends Activity {
 
 
     }
+    public void  todayleave(View v)
+    {
+        Intent i=new Intent(Home.this,Todayleave.class);
+        startActivity(i);
+
+    }
+    public void  status_activity(View v)
+    {
+        Intent i=new Intent(Home.this,Status_Activity.class);
+        startActivity(i);
+
+    }
+
+    public void  Allleave_activity(View v)
+    {
+        Intent i=new Intent(Home.this,All_leave.class);
+        startActivity(i);
+
+    }
+
     public void logout(View v)
     {
         SharedPreferences pref =getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode

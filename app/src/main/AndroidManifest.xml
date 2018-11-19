@@ -44,6 +44,18 @@
             android:name=".leave_request"
             android:label="@string/title_activity_leave_request" >
         </activity>
+        <activity
+            android:name=".Todayleave"
+            android:label="@string/title_activity_todayleave" >
+        </activity>
+        <activity
+            android:name=".Status_Activity"
+            android:label="@string/title_activity_status_" >
+        </activity>
+        <activity
+            android:name=".All_leave"
+            android:label="@string/title_activity_all_leave" >
+        </activity>
     </application>
 
 </manifest>
